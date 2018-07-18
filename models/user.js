@@ -7,7 +7,6 @@ const UserShema = new mongoose.Schema({
 });
 
 UserShema.pre('save', function(next ) {
-	console.l
 	this.password = md5(this.password)
 	next()
 })
