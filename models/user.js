@@ -13,7 +13,6 @@ UserShema.pre('save', function(next ) {
 })
 
 UserShema.methods.checkPassword = function(password){
-	console.log(password, this.password, md5(password),  this.password === md5(password))
 	return this.password === md5(password)
 }
 
