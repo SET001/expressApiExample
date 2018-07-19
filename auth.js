@@ -11,9 +11,12 @@ module.exports.register = async (req, res) => {
 	}else {
 		const user = new User({email, password})
 		await user.save()
+		const avatarLink = req.file
+			? `http://${config.host}:${config.port}/${req.file.destination}${req.file.filename}`
+			: `no avatar`
 		res.json({
 			token: jwt.sign({ _id: user._id, email: user.email }, config.jwtSecret),
-			avatarLink: `http://${config.host}:${config.port}/${req.file.destination}${req.file.filename}`
+			avatarLink
 		})
 	}
 }
