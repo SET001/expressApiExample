@@ -31,6 +31,6 @@ module.exports.login = async (req, res) => {
 			res.status(409).send('wrong email/password')
 		}
 	}else {
-		res.status.(409).send(`user ${email} does not exsits`)
+		res.status(409).send(`user ${email} does not exsits`)
 	}
 }
