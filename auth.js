@@ -7,7 +7,7 @@ module.exports.register = async (req, res) => {
 	const {email, password} = req.body
 	const user = await User.findOne({email})
 	if (user){
-		res.status(400).send(`User with email ${email} alriedy exist!`)
+		res.status(409).send(`User with email ${email} alriedy exist!`)
 	}else {
 		const user = new User(req.body)
 		await user.save()
