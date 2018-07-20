@@ -9,15 +9,18 @@ module.exports.register = async (req, res) => {
 	if (user){
 		res.status(409).send(`User with email ${email} alriedy exist!`)
 	}else {
-		const user = new User(req.body)
-		await user.save()
 		const avatarLink = req.file
-			? `http://${config.host}:${config.port}/${req.file.destination}${req.file.filename}`
-			: `no avatar`
-		res.json({
-			token: jwt.sign({ _id: user._id, email: user.email }, config.jwtSecret),
-			avatarLink
+		? `http://${config.host}:${config.port}/${req.file.destination}${req.file.filename}`
+		: `no avatar`
+		const token = jwt.sign({email}, config.jwtSecret)
+
+		const user = new User({
+			...req.body,
+			avatarLink,
+			token
 		})
+		await user.save()
+		res.json({token,avatarLink})
 	}
 }
 
