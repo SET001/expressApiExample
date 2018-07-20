@@ -3,7 +3,8 @@ const md5 = require('md5')
 
 const UserShema = new mongoose.Schema({
   password: String,
-  email: String
+	email: String,
+	name: String
 });
 
 UserShema.pre('save', function(next ) {

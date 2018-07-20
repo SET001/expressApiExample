@@ -9,7 +9,7 @@ module.exports.register = async (req, res) => {
 	if (user){
 		res.status(400).send(`User with email ${email} alriedy exist!`)
 	}else {
-		const user = new User({email, password})
+		const user = new User(req.body)
 		await user.save()
 		const avatarLink = req.file
 			? `http://${config.host}:${config.port}/${req.file.destination}${req.file.filename}`
