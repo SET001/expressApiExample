@@ -28,7 +28,7 @@ module.exports.login = async (req, res) => {
 		if (user.checkPassword(password)){
 			res.json(omit(['password', '__v'], user.toObject()))
 		} else {
-			res.send('wrong email/password')
+			res.status(409).send('wrong email/password')
 		}
 	}else {
 		res.status.(409).send(`user ${email} does not exsits`)
